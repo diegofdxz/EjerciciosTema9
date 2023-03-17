@@ -37,7 +37,7 @@ Estos son los ciclos que ofrecemos en alquiler:
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDate;
-
+//prueba
 public class Ej1 {
     public class Ciclo{
         protected String marca;
