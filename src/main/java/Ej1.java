@@ -35,9 +35,11 @@ Estos son los ciclos que ofrecemos en alquiler:
  */
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
-//prueba
+
 public class Ej1 {
     public class Ciclo{
         protected String marca;
@@ -101,12 +103,12 @@ public class Ej1 {
         public void setVelocidades(int velocidades){
             this.velocidades = velocidades;
         }
-        public String toString(){
-
-
-            return "Marca: " + getMarca() + " Modelo: " + getModelo() + " Fecha de compra: " + getFechaCompra() + " Tarifa: " + getTarifa() + " Velocidades: " + velocidades;
-
+        @Override
+        public String toString() {
+            return super.toString() + " Velocidades: " + velocidades;
         }
+
+
     }
     public class Segway extends Ciclo{
         protected int autonomia;
@@ -171,17 +173,150 @@ public class Ej1 {
         indiceB++;
 
     }
+    public void incluirBicileta(Bicicleta[] bicicletas){
+        Ej1 ej1 = new Ej1();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.nextLine();
+        if (marca.isEmpty()) {
+            marca = sc.nextLine();
+        }
+        System.out.println("Ingrese el modelo: ");
+        String modelo = sc.nextLine();
+        if (modelo.isEmpty()) {
+            modelo = sc.nextLine();
+        }
+        LocalDate fechaCompra = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateString = null;
+        while (fechaCompra == null){
+        System.out.println("Fecha de compra (dd/MM/yyyy): ");
+        dateString = sc.nextLine();
+        try {
+            fechaCompra = LocalDate.parse(dateString, formatter);
+        }catch (DateTimeParseException e){
+            System.out.println("Fecha incorrecta");
+        }}
+        fechaCompra = LocalDate.parse(dateString, formatter);
+
+        System.out.println("Ingrese la tarifa: (usar , para separar decimales)");
+
+        double tarifa = 0;
+        while (tarifa == 0) {
+            try {
+                tarifa = sc.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("La entrada no es válida. Introduzca un número con el formato correcto.");
+                sc.next();
+            }
+        }
+        System.out.println("Ingrese la cantidad de velocidades: ");
+        int velocidades = sc.nextInt();
+
+
+        ej1.agregarBicicleta(bicicletas, marca, modelo, fechaCompra, tarifa, velocidades);
+        System.out.println("---Bicicleta agregada---");
+
+    }
+
     public void agregarSegway(Segway[] segways,  String marca, String modelo, LocalDate fechaCompra, double tarifa, int autonomia, int alturaMinima){
        int indiceS = 0;
          numCiclo++;
         segways[indiceS] = new Segway(marca, modelo, fechaCompra, tarifa, autonomia, alturaMinima, numCiclo);
         indiceS++;
     }
+    public void incluirSegway(Segway[] segways) {
+        Ej1 ej1 = new Ej1();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.nextLine();
+        if (marca.isEmpty()) {
+            marca = sc.nextLine();
+        }
+        System.out.println("Ingrese el modelo: ");
+        String modelo = sc.nextLine();
+        if (modelo.isEmpty()) {
+            modelo = sc.nextLine();
+        }
+        LocalDate fechaCompra = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateString = null;
+        while (fechaCompra == null) {
+            System.out.println("Fecha de compra (dd/MM/yyyy): ");
+            dateString = sc.nextLine();
+            try {
+                fechaCompra = LocalDate.parse(dateString, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha incorrecta");
+            }
+        }
+        fechaCompra = LocalDate.parse(dateString, formatter);
+
+        System.out.println("Ingrese la tarifa: (usar , para separar decimales)");
+
+        double tarifa = 0;
+        while (tarifa == 0) {
+            try {
+                tarifa = sc.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("La entrada no es válida. Introduzca un número con el formato correcto.");
+                sc.next();
+            }
+        }
+        System.out.println("Ingrese la autonomia: ");
+        int autonomia = sc.nextInt();
+        System.out.println("Ingrese la altura minima: ");
+        int alturaMinima = sc.nextInt();
+        ej1.agregarSegway(segways, marca, modelo, fechaCompra, tarifa, autonomia, alturaMinima);
+    }
+
     public void agregarGiroscopio(Giroscopio[] giroscopios, String marca, String modelo, LocalDate fechaCompra, double tarifa, int autonomia){
         int indiceG = 0;
         numCiclo++;
         giroscopios[indiceG] = new Giroscopio(marca, modelo, fechaCompra, tarifa, autonomia, numCiclo);
         indiceG++;
+    }
+    public void incluirGiroscopio(Giroscopio[] giroscopios){
+        Ej1 ej1 = new Ej1();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.nextLine();
+        if (marca.isEmpty()) {
+            marca = sc.nextLine();
+        }
+        System.out.println("Ingrese el modelo: ");
+        String modelo = sc.nextLine();
+        if (modelo.isEmpty()) {
+            modelo = sc.nextLine();
+        }
+        LocalDate fechaCompra = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateString = null;
+        while (fechaCompra == null) {
+            System.out.println("Fecha de compra (dd/MM/yyyy): ");
+            dateString = sc.nextLine();
+            try {
+                fechaCompra = LocalDate.parse(dateString, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha incorrecta");
+            }
+        }
+        fechaCompra = LocalDate.parse(dateString, formatter);
+
+        System.out.println("Ingrese la tarifa: (usar , para separar decimales)");
+        double tarifa = 0;
+        while (tarifa == 0) {
+            try {
+                tarifa = sc.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("La entrada no es válida. Introduzca un número con el formato correcto.");
+                sc.next();
+            }
+        }
+        System.out.println("Ingrese la autonomia: ");
+        int autonomia = sc.nextInt();
+        ej1.agregarGiroscopio(giroscopios, marca, modelo, fechaCompra, tarifa, autonomia);
+
     }
 public void mostrarBicicletas(Bicicleta[] bicicletas) {
     for (int i = 0; i < bicicletas.length; i++) {
@@ -246,9 +381,6 @@ public void alquilarGiroscopio(Giroscopio[] giroscopios){
 }
     public static class Principal {
         Bicicleta[] bicicletas = new Bicicleta[100];
-
-
-
         Giroscopio[] giroscopios = new Giroscopio[100];
         Segway[] segways = new Segway[100];
         Ej1 ej1 = new Ej1();
@@ -258,7 +390,6 @@ public void alquilarGiroscopio(Giroscopio[] giroscopios){
                 int opcion = 0;
                 System.out.println("Bienvenido al menu de alquiler de ciclos");
             System.out.println("1. Agregar Ciclo");
-
             System.out.println("2. Mostrar Ciclos");
             System.out.println("3. Alquilar Ciclo");
             System.out.println("-1. Salir");
@@ -276,78 +407,13 @@ public void alquilarGiroscopio(Giroscopio[] giroscopios){
 
                             switch (opcion2) {
                                 case 1:
-
-                                    System.out.println("Ingrese la marca: ");
-                                    String marca = sc.nextLine();
-                                    if (marca.isEmpty()) {
-                                        marca = sc.nextLine();
-                                    }
-                                    System.out.println("Ingrese el modelo: ");
-                                    String modelo = sc.nextLine();
-                                    if (modelo.isEmpty()) {
-                                        modelo = sc.nextLine();
-                                    }
-                                    System.out.println("Fecha de compra (dd/MM/yyyy): ");
-                                    String dateString = sc.nextLine();
-
-                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                    LocalDate fechaCompra = LocalDate.parse(dateString, formatter);
-                                    System.out.println("Ingrese la tarifa: (usar , para separar decimales)");
-                                    double tarifa = sc.nextDouble();
-
-                                    System.out.println("Ingrese la cantidad de velocidades: ");
-                                    int velocidades = sc.nextInt();
-
-
-                                    ej1.agregarBicicleta(bicicletas, marca, modelo, fechaCompra, tarifa, velocidades);
-                                    System.out.println("---Bicicleta agregada---");
+                                    ej1.incluirBicileta(bicicletas);
                                     break;
                                 case 2:
-
-                                    System.out.println("Ingrese la marca: ");
-                                    String marca2 = sc.nextLine();
-                                    if (marca2.isEmpty()) {
-                                        marca2 = sc.nextLine();
-                                    }
-                                    System.out.println("Ingrese el modelo: ");
-                                    String modelo2 = sc.nextLine();
-                                    if (modelo2.isEmpty()) {
-                                        modelo2 = sc.nextLine();
-                                    }
-                                    System.out.println("Fecha de compra (dd/MM/yyyy): ");
-                                    String dateString2 = sc.nextLine();
-                                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                    LocalDate fechaCompra2 = LocalDate.parse(dateString2, formatter2);
-                                    System.out.println("Ingrese la tarifa: ");
-                                    double tarifa2 = sc.nextDouble();
-                                    System.out.println("Ingrese la autonomia: ");
-                                    int autonomia = sc.nextInt();
-                                    System.out.println("Ingrese la altura minima: ");
-                                    int alturaMinima = sc.nextInt();
-                                    ej1.agregarSegway(segways, marca2, modelo2, fechaCompra2, tarifa2, autonomia, alturaMinima);
+                                    ej1.incluirSegway(segways);
                                     break;
                                 case 3:
-
-                                    System.out.println("Ingrese la marca: ");
-                                    String marca3 = sc.nextLine();
-                                    if (marca3.isEmpty()) {
-                                        marca3 = sc.nextLine();
-                                    }
-                                    System.out.println("Ingrese el modelo: ");
-                                    String modelo3 = sc.nextLine();
-                                    if (modelo3.isEmpty()) {
-                                        modelo3 = sc.nextLine();
-                                    }
-                                    System.out.println("Fecha de compra (dd/MM/yyyy): ");
-                                    String dateString3 = sc.nextLine();
-                                    DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                                    LocalDate fechaCompra3 = LocalDate.parse(dateString3, formatter3);
-                                    System.out.println("Ingrese la tarifa: ");
-                                    double tarifa3 = sc.nextDouble();
-                                    System.out.println("Ingrese la autonomia: ");
-                                    int autonomia3 = sc.nextInt();
-                                    ej1.agregarGiroscopio(giroscopios, marca3, modelo3, fechaCompra3, tarifa3, autonomia3);
-
+                                    ej1.incluirGiroscopio(giroscopios);
                                     break;
                                 case -1:
                                     System.exit(0);
